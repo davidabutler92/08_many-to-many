@@ -49,7 +49,7 @@ describe('comments routes', () => {
       .get(`/api/v1/comments/${comment.id}`);
 
     expect(res.body).toEqual(comment);
-  })
+  });
 
   it('should update a comment using PUT', async() => {
     const comment = await Comment.insert({ text: 'holy cow, new comment!' });
@@ -63,5 +63,13 @@ describe('comments routes', () => {
       text: 'holy cow, updated my comment!' 
     });
   });
-  
+
+  it('should delete a comment by id', async() => {
+    const comment = await Comment.insert({ text: 'holy cow, new comment!' });
+
+    const res = await request(app)
+      .delete(`/api/v1/comments/${comment.id}`);
+
+    expect(res.body).toEqual(comment);
+  });
 });
