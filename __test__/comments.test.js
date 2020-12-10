@@ -31,7 +31,7 @@ describe('comments routes', () => {
       { text: 'first comment' },
       { text: 'second comment' },
       { text: 'third comment' }
-    ]).map(comment => Comment.insert(comment));
+    ].map(comment => Comment.insert(comment)));
 
     const res = await request(app)
       .get('/api/v1/comments');
