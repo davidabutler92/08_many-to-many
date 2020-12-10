@@ -45,9 +45,23 @@ describe('comments routes', () => {
       text: 'Itsa comment wee'
     });
 
-    const res = request(app)
+    const res = await request(app)
       .get(`/api/v1/comments/${comment.id}`);
 
     expect(res.body).toEqual(comment);
   })
+
+  it('should update a comment using PUT', async() => {
+    const comment = await Comment.insert({ text: 'holy cow, new comment!' });
+
+    const res = await request(app)
+      .put(`/api/v1/comments/${comment.id}`)
+      .send({ text: 'holy cow, updated my comment!' });
+
+    expect(res.body).toEqual({ 
+      id: comment.id,
+      text: 'holy cow, updated my comment!' 
+    });
+  });
+  
 });
