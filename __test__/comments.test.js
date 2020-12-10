@@ -39,4 +39,15 @@ describe('comments routes', () => {
     expect(res.body).toEqual(expect.arrayContaining(comments));
     expect(res.body).toHaveLength(comments.length);
   });
+
+  it('should get a comment by id', async() => {
+    const comment = await Comment.insert({
+      text: 'Itsa comment wee'
+    });
+
+    const res = request(app)
+      .get(`/api/v1/comments/${comment.id}`);
+
+    expect(res.body).toEqual(comment);
+  })
 });
