@@ -15,11 +15,11 @@ describe('hashtag routes', () => {
   it('should create a hashtag using POST', async() => {
     const res = await request(app)
       .post('/api/v1/hashtags')
-      .send({ text: '#ballin' });
+      .send({ title: '#ballin' });
 
     expect(res.body).toEqual({
       id: '1',
-      text: '#ballin' 
+      title: '#ballin' 
     });
   });
 
