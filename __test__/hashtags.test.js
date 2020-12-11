@@ -47,4 +47,17 @@ describe('hashtag routes', () => {
     expect(res.body).toEqual(hashtag);
   });
 
+  it('should update a hashtag using PUT', async() => {
+    const hashtag = await Hashtag.insert({ title: '#datnewnew' });
+
+    const res = await request(app)
+      .put(`/api/v1/hashtags/${hashtag.id}`)
+      .send({ title: 'datoldold' });
+
+    expect(res.body).toEqual({
+      id: hashtag.id,
+      title: 'datoldold' 
+    });
+  });
+
 });
