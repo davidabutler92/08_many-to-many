@@ -38,7 +38,7 @@ describe('hashtag routes', () => {
     expect(res.body).toHaveLength(hashtags.length);
   });
 
-  it('should get a hashtag by ID using GET', async() => {
+  it.only('should get a hashtag by ID using GET', async() => {
     const hashtag = await Hashtag.insert({ title: '#code' });
 
     const res = await request(app)
