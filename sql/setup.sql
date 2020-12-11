@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS comments CASCADE;
 DROP TABLE IF EXISTS hashtags CASCADE;
+DROP TABLE IF EXISTS comments_hashtags;
 
 
 CREATE TABLE comments (
@@ -12,8 +13,8 @@ CREATE TABLE hashtags (
   title TEXT NOT NULL
 );
 
-REATE TABLE comments_hashtags (
+CREATE TABLE comments_hashtags (
   comment_id  BIGINT REFERENCES comments(id),
   tag_id BIGINT REFERENCES hashtags(id),
   PRIMARY KEY(comment_id, tag_id)
-);C
+);
