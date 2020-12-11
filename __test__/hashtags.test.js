@@ -60,4 +60,13 @@ describe('hashtag routes', () => {
     });
   });
 
+  it('should delete a hastag by id', async() => {
+    const hashtag = await Hashtag.insert({ title: '#datnewnew' });
+
+    const res = await request(app)
+      .delete(`/api/v1/hashtags/${hashtag.id}`);
+
+    expect(res.body).toEqual(hashtag);
+  });
+
 });
