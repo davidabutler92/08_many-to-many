@@ -3,6 +3,7 @@ const fs = require('fs');
 const request = require('supertest');
 const pool = require('../lib/utils/pool');
 const Comment = require('../lib/models/Comment');
+const Hashtag = require('../lib/models/Hashtag');
 
 describe('comments routes', () => {
   beforeEach(() => {
@@ -40,15 +41,25 @@ describe('comments routes', () => {
     expect(res.body).toHaveLength(comments.length);
   });
 
-  it('should get a comment by id', async() => {
+  it.only('should get a comment by id', async() => {
+    await Promise.all([
+      { title: '#sunny' },
+      { title: '#rainy' },
+      { title: '#cloudy' }
+    ].map(hashtags => Hashtag.insert(hashtags)));
+
     const comment = await Comment.insert({
-      text: 'Itsa comment wee'
+      text: 'this is a comment!',
+      tags: ['#sunny', '#rainy']
     });
 
     const res = await request(app)
       .get(`/api/v1/comments/${comment.id}`);
 
-    expect(res.body).toEqual(comment);
+    expect(res.body).toEqual({
+      ...comment,
+      tags: ['#sunny', '#rainy']
+    });
   });
 
   it('should update a comment using PUT', async() => {

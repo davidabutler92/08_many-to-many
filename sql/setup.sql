@@ -11,3 +11,9 @@ CREATE TABLE hashtags (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   title TEXT NOT NULL
 );
+
+REATE TABLE comments_hashtags (
+  comment_id  BIGINT REFERENCES comments(id),
+  tag_id BIGINT REFERENCES hashtags(id),
+  PRIMARY KEY(comment_id, tag_id)
+);C
