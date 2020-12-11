@@ -41,7 +41,7 @@ describe('comments routes', () => {
     expect(res.body).toHaveLength(comments.length);
   });
 
-  it.only('should get a comment by id', async() => {
+  it('should get a comment by id', async() => {
     await Promise.all([
       { title: '#sunny' },
       { title: '#rainy' },
