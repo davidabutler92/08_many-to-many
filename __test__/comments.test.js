@@ -58,7 +58,7 @@ describe('comments routes', () => {
 
     expect(res.body).toEqual({
       ...comment,
-      tags: ['#sunny', '#rainy']
+      tags: expect.arrayContaining(['#sunny', '#rainy'])
     });
   });
 
